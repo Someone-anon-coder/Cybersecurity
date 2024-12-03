@@ -12,8 +12,8 @@ This repository covers both theoretical knowledge and practical hands-on skills 
 Each section below is a major cybersecurity concept. Check off the boxes as you complete each section.
 
 ### 1. **Introduction to Cybersecurity**
-- [ ] Overview of Cybersecurity
-- [ ] Cybersecurity Threats and Attack Types
+- [✅] Overview of Cybersecurity
+- [🟡] Cybersecurity Threats and Attack Types
 - [ ] Cybersecurity Defense Strategies
 - [ ] Introduction to the CIA Triad (Confidentiality, Integrity, Availability)
 
