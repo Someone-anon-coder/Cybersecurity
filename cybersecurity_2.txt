@@ -1,0 +1,115 @@
+Cybersecurity Threats and Attack Types
+
+Cybersecurity threats refer to potential malicious actions that can compromise the confidentiality, integrity, or availability of data or systems. 
+These threats can come from various sources, such as cybercriminals, hackers, insiders, or even nation-state actors. 
+The purpose of these attacks can range from financial gain and espionage to activism or just causing disruption.
+
+Cybersecurity threats typically fall into several broad categories, each with specific attack types. 
+Below are some of the most common cybersecurity threats and attack types:
+
+
+1) Malware:
+
+    Malware (short for malicious software) is one of the most common and widely recognized forms of cyberattack. 
+    It refers to any software intentionally designed to cause harm to a system or network.
+    Types of Malware:
+
+    - Viruses: Programs that attach themselves to legitimate files or programs and spread when the infected program is executed. They can corrupt or delete files.
+    - Worms: Similar to viruses, but unlike viruses, worms are self-replicating and can spread across networks without human intervention.
+    - Trojans: Malicious software disguised as legitimate software. Once installed, they can steal data, provide remote access, or cause other harm.
+    - Ransomware: A form of malware that locks or encrypts the victim's data and demands a ransom in exchange for unlocking or decrypting it (e.g., WannaCry, CryptoLocker).
+    - Spyware/Adware: Malware designed to gather information (keylogging, screen scraping, etc.) without the user's knowledge or consent.
+
+
+2) Phishing Attacks:
+
+    Phishing is a social engineering attack where attackers attempt to trick individuals into providing sensitive information, such as usernames, passwords, credit card numbers, or other personal details.
+    Types of Phishing:
+
+    - Email Phishing: Attackers send fraudulent emails that appear to come from trusted sources (e.g., banks, companies). These emails typically include links to fake websites or attachments designed to steal data.
+    - Spear Phishing: A more targeted form of phishing, where attackers personalize the message to a specific individual or organization, often using information obtained from social media or other sources.
+    - Vishing (Voice Phishing): Attackers use phone calls or voice messages to trick victims into giving up sensitive information (e.g., pretending to be from a bank).
+    - Smishing (SMS Phishing): Similar to vishing, but conducted via text messages, often with links to malicious websites or fake login pages.
+
+
+3) Denial of Service (DoS) and Distributed Denial of Service (DDoS):
+
+    Denial of Service (DoS) attacks aim to make a system or network unavailable to its intended users by overwhelming it with traffic or requests.
+    Types:
+
+    - DoS Attack: A single source floods a network, server, or website with traffic, rendering it unable to respond to legitimate requests.
+    - DDoS Attack: A more powerful version of DoS, where the attack comes from multiple systems or a botnet. This makes it harder to mitigate because the attack traffic comes from many sources.
+
+    Common DDoS Techniques:
+
+    - UDP Flood: Sending large numbers of User Datagram Protocol (UDP) packets to random ports on the target system, causing it to overload.
+    - SYN Flood: Sending a large number of "SYN" requests (part of the TCP handshake) to a target, which exhausts resources and causes the server to become unresponsive.
+
+
+4) SQL Injection (SQLi):
+
+    SQL Injection is a web application attack where an attacker exploits a vulnerability in an application's software by injecting malicious SQL queries into input fields (like search boxes or login forms) that interact with a database.
+    The attacker inputs SQL code into a form, and if the system doesn't properly sanitize the input, the database executes the attacker's code, allowing unauthorized access to the database or even manipulation of its data.
+    Potential Impact:
+
+    - Data theft or corruption
+    - Unauthorized access to user data (including passwords and financial data)
+    - Deletion or alteration of database records
+
+
+5) Man-in-the-Middle (MitM) Attacks:
+
+    A Man-in-the-Middle attack occurs when an attacker intercepts and potentially alters the communication between two parties without either party knowing.
+    Types of MitM Attacks:
+
+    - Session Hijacking: An attacker intercepts a session token and impersonates a user.
+    - SSL Stripping: An attacker downgrades an HTTPS connection to HTTP, allowing them to intercept unencrypted traffic.
+    - Eavesdropping: The attacker listens to unencrypted communications (e.g., via open Wi-Fi networks) to capture sensitive data like login credentials.
+
+
+6) Cross-Site Scripting (XSS):
+
+    Cross-Site Scripting (XSS) occurs when an attacker injects malicious scripts into trusted websites. 
+    These scripts are then executed in the browsers of unsuspecting users who visit the compromised website.
+    Types of XSS:
+
+    - Stored XSS: The malicious script is permanently stored on the target server (e.g., in a database or comment section).
+    - Reflected XSS: The malicious script is reflected off the server and executed when the user clicks a malicious link or submits a form.
+    - DOM-Based XSS: The vulnerability exists in the client-side code (JavaScript) and is triggered when the web application improperly processes user input.
+
+
+7) Credential Stuffing:
+
+    Credential stuffing is an automated attack in which attackers use lists of stolen usernames and passwords to try and gain unauthorized access to multiple accounts, often by leveraging the fact that users reuse passwords across sites.
+    Attackers obtain large databases of credentials from data breaches and use bots to test those credentials on different sites (social media, banking, email, etc.) to gain access to user accounts.
+
+
+8) Insider Threats:
+
+    An insider threat occurs when someone within an organization (e.g., employees, contractors, or partners) intentionally or unintentionally causes harm to the organization's security.
+    Types of Insider Threats:
+
+    - Malicious Insiders: Employees or contractors with authorized access who use their position to harm the organization (e.g., stealing data or sabotaging systems).
+    - Unintentional Insiders: Employees or individuals who, due to negligence or lack of awareness, inadvertently expose systems or data to threats (e.g., clicking on phishing emails or mishandling sensitive information).
+
+
+9) Social Engineering Attacks:
+
+    Social engineering involves manipulating people into performing actions or divulging confidential information that may not align with their normal behavior. 
+    Unlike technical attacks that exploit vulnerabilities in systems, social engineering exploits human psychology.
+    Types of Social Engineering Attacks:
+
+    - Pretexting: The attacker creates a fabricated scenario to gain access to confidential information (e.g., posing as a bank representative to gather sensitive data).
+    - Baiting: Offering something enticing (e.g., free software, a USB drive) to lure individuals into compromising their systems or providing sensitive data.
+    - Quizzes and Surveys: Attackers use fake quizzes or surveys on social media to gather personal information that can be used to bypass security questions or gain access to accounts.
+
+
+10) Advanced Persistent Threats (APTs):
+
+    APTs are prolonged, targeted attacks aimed at a specific entity, often carried out by nation-states or highly skilled cybercriminals. 
+    These attacks can span months or even years, and the attacker’s goal is often to steal sensitive data, monitor activity, or sabotage operations.
+    Characteristics:
+
+    - Stealth: APTs are designed to be covert and go undetected for long periods of time.
+    - Sophistication: They often employ multiple stages, from initial infiltration to maintaining access and moving laterally within a network.
+    - Advanced Tools: APT attackers use custom-built malware, zero-day vulnerabilities, and complex techniques to maintain persistence.
