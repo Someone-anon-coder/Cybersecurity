@@ -15,10 +15,10 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] Overview of Cybersecurity
 - [✅] Cybersecurity Threats and Attack Types
 - [✅] Cybersecurity Defense Strategies
-- [🟡] Introduction to the CIA Triad (Confidentiality, Integrity, Availability)
+- [✅] Introduction to the CIA Triad (Confidentiality, Integrity, Availability)
 
 ### 2. **Networking Basics**
-- [ ] TCP/IP Model and OSI Model
+- [🟡] TCP/IP Model and OSI Model
 - [ ] IP Addressing and Subnetting
 - [ ] Network Protocols (HTTP, FTP, DNS, DHCP)
 - [ ] Introduction to Routing and Switching
