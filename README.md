@@ -18,8 +18,8 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] Introduction to the CIA Triad (Confidentiality, Integrity, Availability)
 
 ### 2. **Networking Basics**
-- [🟡] TCP/IP Model and OSI Model
-- [ ] IP Addressing and Subnetting
+- [✅] TCP/IP Model and OSI Model
+- [🟡] IP Addressing and Subnetting
 - [ ] Network Protocols (HTTP, FTP, DNS, DHCP)
 - [ ] Introduction to Routing and Switching
 - [ ] Practical: Setting up a basic network in VirtualBox or VMware

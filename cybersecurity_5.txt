@@ -1,0 +1,79 @@
+TCP/IP Model and OSI Model
+
+The TCP/IP Model and the OSI Model are two conceptual frameworks used to understand how different networking protocols and devices work together to enable communication between systems. 
+Though the models share some similarities, they differ in their structure and purpose. 
+Let’s break them down.
+
+1. OSI Model - Open Systems Interconnection Model
+
+    The OSI Model is a conceptual framework that standardizes the functions of a communication system into seven layers, from the physical transmission of data to the application that interacts with the user. 
+    It was developed by the International Organization for Standardization (ISO) to guide product developers and facilitate interoperability between different systems.
+
+    The 7 Layers of the OSI Model:
+
+        - Physical Layer: Deals with the actual physical transmission of raw data over a medium, like cables, radio frequencies, or optical fiber. Examples: Ethernet cables, fiber optics, wireless signals, network cards, and hubs.
+        - Data Link Layer: Provides error detection and correction, as well as the physical addressing (MAC addresses) required for data transfer within a local network. Examples: Ethernet, MAC addresses, switches, and bridges.
+        - Network Layer: Responsible for routing data across different networks, using logical addressing (IP addresses) and routing protocols. Examples: IP (Internet Protocol), routers, and IP addressing.
+        - Transport Layer: Manages end-to-end communication, ensuring reliable data transfer, error correction, and flow control between systems. Examples: TCP (Transmission Control Protocol), UDP (User Datagram Protocol).
+        - Session Layer: Establishes, manages, and terminates sessions between two communicating devices, ensuring that data exchange is organized. Examples: NetBIOS, RPC (Remote Procedure Call).
+        - Presentation Layer: Translates data between different formats, encrypts or compresses data, and ensures that data is in a format usable by the application layer. Examples: SSL/TLS, JPEG, GIF, encryption algorithms.
+        - Application Layer: Provides the interface through which users and applications interact with the network. It defines communication protocols and services. Examples: HTTP, FTP, SMTP, DNS, POP3, IMAP.
+    
+
+2. TCP/IP Model - Transmission Control Protocol/Internet Protocol Model
+
+    The TCP/IP Model is a more practical and simplified networking model that underpins the Internet. 
+    Developed by the U.S. Department of Defense, it defines the protocols and layers needed for communication in computer networks. 
+    The model has four layers (compared to the OSI's seven), and each layer corresponds to multiple layers in the OSI model.
+
+    The 4 Layers of the TCP/IP Model:
+
+        - Link Layer (Network Interface Layer): Corresponds to the OSI Physical and Data Link layers. It handles the physical transmission of data over a medium and provides data link control, error detection, and access to physical network resources. Ethernet, Wi-Fi, ARP (Address Resolution Protocol), network adapters
+        - Internet Layer: Equivalent to the OSI Network Layer, this layer is responsible for logical addressing and routing. It uses IP addresses to determine the best path for data to travel across networks. Examples: IP (Internet Protocol), ICMP (Internet Control Message Protocol), routers.
+        - Transport Layer: Responsible for ensuring reliable end-to-end communication. It handles segmentation, flow control, and error detection. Examples: TCP (Transmission Control Protocol), UDP (User Datagram Protocol).
+        - Application Layer: Corresponds to the OSI Application, Presentation, and Session layers. It defines the protocols for application-level communication and data exchange between devices. Examples: HTTP, FTP, SMTP, DNS, POP3, IMAP.
+    
+
+Key Differences Between the OSI and TCP/IP Models
+
+    OSI Model, TCP/IP Model
+    7 Layers,	4 Layers
+    More Theoretical,	More Practical
+    Strict Layer Divisions,	Combines Some Layers
+    Each Layer is Clearly Defined,	Layers Are Less Rigid
+    Focuses on establishing a universal framework for network communications,	Focuses on actual protocols used in the real world (i.e., the Internet)
+
+
+Practical Examples of TCP/IP and OSI Models in Action:
+
+1. Web Browsing (HTTP/HTTPS):
+
+    OSI Model:
+        - Application Layer: HTTP/HTTPS protocols interact with the browser.
+        - Presentation Layer: Data formatting (e.g., HTML, SSL encryption).
+        - Session Layer: Manages session between client and server.
+        - Transport Layer: Ensures reliable data transfer (TCP).
+        - Network Layer: IP routing directs the request to the appropriate web server.
+        - Data Link Layer: MAC addresses for local network communication.
+        - Physical Layer: Ethernet or Wi-Fi transmits the data over physical medium.
+
+    TCP/IP Model:
+        - Application Layer: Handles HTTP/HTTPS and web services.
+        - Transport Layer: Ensures data is properly segmented and transmitted using TCP.
+        - Internet Layer: IP addresses route packets across networks.
+        - Link Layer: Physical media and network interface control.
+
+
+2. Sending an Email (SMTP/IMAP):
+
+    OSI Model:
+        - Application Layer: Email clients interact with SMTP (sending) and IMAP (retrieving).
+        - Transport Layer: Uses TCP to ensure reliable delivery.
+        - Network Layer: IP addresses are used to route the email between mail servers.
+        - Data Link and Physical Layers: Handle the transmission over physical network media.
+
+    TCP/IP Model:
+        - Application Layer: Handles email communication protocols.
+        - Transport Layer: Uses TCP to provide reliable data transfer.
+        - Internet Layer: IP is used to route the email data to the correct destination.
+        - Link Layer: Manages the physical connection to the network.
