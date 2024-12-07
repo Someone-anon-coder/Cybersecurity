@@ -4,7 +4,7 @@ The TCP/IP Model and the OSI Model are two conceptual frameworks used to underst
 Though the models share some similarities, they differ in their structure and purpose. 
 Let’s break them down.
 
-1. OSI Model - Open Systems Interconnection Model
+1. OSI Model - Open Systems Interconnection Model:
 
     The OSI Model is a conceptual framework that standardizes the functions of a communication system into seven layers, from the physical transmission of data to the application that interacts with the user. 
     It was developed by the International Organization for Standardization (ISO) to guide product developers and facilitate interoperability between different systems.
@@ -20,7 +20,7 @@ Let’s break them down.
         - Application Layer: Provides the interface through which users and applications interact with the network. It defines communication protocols and services. Examples: HTTP, FTP, SMTP, DNS, POP3, IMAP.
     
 
-2. TCP/IP Model - Transmission Control Protocol/Internet Protocol Model
+2. TCP/IP Model - Transmission Control Protocol/Internet Protocol Model:
 
     The TCP/IP Model is a more practical and simplified networking model that underpins the Internet. 
     Developed by the U.S. Department of Defense, it defines the protocols and layers needed for communication in computer networks. 
@@ -34,7 +34,7 @@ Let’s break them down.
         - Application Layer: Corresponds to the OSI Application, Presentation, and Session layers. It defines the protocols for application-level communication and data exchange between devices. Examples: HTTP, FTP, SMTP, DNS, POP3, IMAP.
     
 
-Key Differences Between the OSI and TCP/IP Models
+Key Differences Between the OSI and TCP/IP Models:
 
     OSI Model, TCP/IP Model
     7 Layers,	4 Layers
