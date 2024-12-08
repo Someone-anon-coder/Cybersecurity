@@ -1,0 +1,138 @@
+IP Addressing and Subnetting
+
+IP addressing and subnetting are foundational concepts in networking. 
+They help devices communicate with each other over a network or the internet. 
+Understanding how IP addresses work, how to break them into subnets, and how subnetting improves network efficiency and security is critical for anyone working in networking or cybersecurity.
+
+Let's break down the concepts:
+
+1. IP Addressing:
+
+    An IP address (Internet Protocol address) is a unique identifier assigned to devices (like computers, routers, or servers) that enables them to communicate on a network.
+    
+    IP addresses are classified into two versions:
+        - IPv4 (Internet Protocol version 4)
+        - IPv6 (Internet Protocol version 6)
+    
+    IPv4 Addressing:
+
+        IPv4 is the most widely used version and consists of 32 bits, which are typically represented as 4 octets (8-bit blocks), written in dotted decimal format (e.g., 192.168.1.1).
+        Each octet in an IPv4 address can represent a value between 0 and 255 (8 bits = 256 possible values).
+        
+        Example: 192.168.1.1 is an IPv4 address where: 
+            - 192 is the first octet
+            - 168 is the second octet
+            - 1 is the third octet
+            - 1 is the fourth octet
+    
+    IPv6 Addressing:
+
+        IPv6 was introduced to address the limitations of IPv4 (such as the finite number of available addresses). 
+        It uses 128 bits, written as 8 groups of 4 hexadecimal digits separated by colons (:).
+        Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334 is an IPv6 address.
+        IPv6 addresses provide an almost unlimited number of addresses, solving the problem of IPv4 address exhaustion.
+        
+        Components of an IPv4 Address:
+            - Network portion: Identifies the network the device belongs to.
+            - Host portion: Identifies the specific device (host) within that network.
+        
+        The network and host portions are determined by a subnet mask (more on this in subnetting). 
+        The subnet mask specifies which part of the address is used for the network and which part is used for the host.
+
+
+2. Subnetting:
+
+    Subnetting is the process of dividing a large network into smaller, more manageable subnetworks (subnets). 
+    Subnetting allows for more efficient use of IP addresses, improves network performance, and enhances security by isolating network segments.
+
+    Why Subnetting is Needed:
+
+        - IP Address Conservation: By creating smaller subnets, networks can avoid wasting IP addresses.
+        - Network Segmentation: Subnetting can help limit broadcast traffic, improve security, and reduce congestion.
+        - Organizing Networks: Subnets allow networks to be logically divided based on departments, regions, or services.
+    
+    Subnet Mask:
+
+        A subnet mask is a 32-bit number that defines which part of an IP address is the network portion and which part is the host portion. 
+        It essentially "masks" the IP address to identify the network and host bits.
+
+        Standard subnet masks:
+
+            - 255.0.0.0 or /8 for Class A networks (8 bits for network, 24 bits for host).
+            - 255.255.0.0 or /16 for Class B networks (16 bits for network, 16 bits for host).
+            - 255.255.255.0 or /24 for Class C networks (24 bits for network, 8 bits for host).
+        
+        CIDR Notation (Classless Inter-Domain Routing):
+
+            CIDR notation is an alternative way to express subnet masks. 
+            Instead of using the full subnet mask (e.g., 255.255.255.0), CIDR notation uses a slash (/) followed by the number of bits in the network portion.
+
+            Example: 192.168.1.0/24: This means that the first 24 bits are used for the network address, and the remaining 8 bits are for host addresses.
+        
+        Subnetting Process:
+
+            1) Identify the Network and Host Portion: Given an IP address and subnet mask, determine how many bits are used for the network and host portions.
+            2) Calculate Subnets: You can borrow bits from the host portion to create subnets. For example, if you borrow 2 bits from the host portion in a /24 network, you create a /26 subnet, which allows for more subnets but fewer hosts per subnet.
+            3) Subnet Address and Range:
+                - Network Address: The first address in the subnet, used to identify the network.
+                - Broadcast Address: The last address in the subnet, used to broadcast messages to all devices within that subnet.
+                - Valid Host Addresses: The range of IP addresses between the network and broadcast address. These can be assigned to devices.
+
+
+3. Classful Addressing vs. Classless Addressing
+
+    Historically, IP addresses were divided into classes, each with a predefined range of addresses. These classes were:
+
+    Class A: 1.0.0.0 to 127.255.255.255
+
+        - Subnet mask: /8 (e.g., 255.0.0.0)
+        - Supports large networks (16 million hosts).
+    
+    Class B: 128.0.0.0 to 191.255.255.255
+
+        - Subnet mask: /16 (e.g., 255.255.0.0)
+        - Supports medium-sized networks (65,000 hosts).
+    
+    Class C: 192.0.0.0 to 223.255.255.255
+
+        - Subnet mask: /24 (e.g., 255.255.255.0)
+        - Supports smaller networks (254 hosts).
+    
+    However, classful addressing was inefficient, as it didn’t allow for flexible subnetting. 
+    This led to the adoption of Classless Inter-Domain Routing (CIDR), which allows networks to be divided based on the number of bits needed, without adhering to the rigid class boundaries.
+
+
+4. Example of Subnetting
+
+    Problem: You have the IP address 192.168.1.0/24 and need to divide it into 4 subnets.
+
+    Step 1: Determine the number of bits to borrow
+
+        - Start with /24 (which means 24 bits for the network).
+        - To create 4 subnets, you need to borrow 2 bits from the host portion (because 2^2 = 4).
+    
+        Thus, the new subnet mask becomes /26 (24 bits + 2 borrowed bits = 26 bits for the network portion).
+    
+    Step 2: Calculate the subnets
+
+        - The new subnet mask is 255.255.255.192 (/26).
+        - The network address is 192.168.1.0, and the range of subnets will be:
+
+            Subnet # | Subnet Address   | First Host Address | Last Host Address | Broadcast Address | Number of Hosts
+            1        | 192.168.1.0/26   | 192.168.1.1        | 192.168.1.62      | 192.168.1.63      | 62
+            2        | 192.168.1.64/26  | 192.168.1.65       | 192.168.1.126     | 192.168.1.127     | 62
+            3        | 192.168.1.128/26 | 192.168.1.129      | 192.168.1.190     | 192.168.1.191     | 62
+            4        | 192.168.1.192/26 | 192.168.1.193      | 192.168.1.254     | 192.168.1.255     | 62
+    
+    Step 3: Verify the result
+
+        - Each subnet has 62 usable IP addresses, and each subnet can support up to 62 devices. 
+        - The first and last addresses in each subnet are reserved for the network and broadcast addresses, respectively.
+
+
+5. Practical Applications of Subnetting
+
+    - IP Address Conservation: Efficiently allocate IP addresses in large organizations to avoid wasting addresses.
+    - Network Segmentation: Isolate different network segments (e.g., separating departments like HR, Finance, etc.) for security, performance, and management purposes.
+    - Security: By segmenting networks, you can limit access between subnets, thus controlling how data flows within the network and preventing lateral movement in case of a security breach.
+    - Routing Efficiency: Subnetting allows routers to manage traffic more effectively by reducing the number of devices per subnet and limiting broadcast traffic.
