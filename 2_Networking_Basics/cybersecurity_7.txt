@@ -1,0 +1,126 @@
+Network Protocols
+
+Network protocols are rules or standards that define how data is transmitted across networks. 
+Each protocol operates at different layers of the OSI or TCP/IP models and serves a specific function in the communication process. 
+Let's dive into the some of the most common network protocols: HTTP, FTP, DNS, and DHCP.
+
+1. HTTP (HyperText Transfer Protocol):
+
+    - Layer: Application Layer (OSI), Application Layer (TCP/IP)
+    - Function: HTTP is the protocol used for transferring web pages and web resources over the internet.
+    - Purpose: It defines how clients (like web browsers) request web pages from servers, and how servers send the data back to the clients.
+
+    Key Features of HTTP:
+
+        - Stateless: HTTP doesn’t retain any memory of previous requests. Each request is independent, meaning the server doesn’t remember any data from prior interactions.
+        - Request/Response Model: Clients send HTTP requests to servers, and servers return HTTP responses. The response typically contains HTML content, images, or other web resources.
+         
+    Common HTTP methods include:
+
+        - GET: Request data from a server.
+        - POST: Send data to a server (usually for form submissions).
+        - PUT: Replace data on the server.
+        - DELETE: Remove data from the server.
+        - HEAD: Similar to GET, but only retrieves headers.
+    
+    Example HTTP Request: 
+    
+        - GET /index.html HTTP/1.1
+          Host: www.example.com
+    
+    This requests the index.html file from www.example.com.
+
+    Secure Version: HTTPS (HyperText Transfer Protocol Secure) uses SSL/TLS to encrypt the communication, ensuring data confidentiality and integrity.
+
+
+2. FTP (File Transfer Protocol):
+
+    - Layer: Application Layer (OSI), Application Layer (TCP/IP)
+    - Function: FTP is used for transferring files between computers over a TCP/IP network.
+    - Purpose: FTP allows for the upload, download, and management of files on remote servers.
+
+    Active & Passive Mode:
+
+        - Active Mode: The client opens a port and listens for incoming data from the server.
+        - Passive Mode: The server opens a port and the client connects to it to receive data. This mode is more common, especially in networks with firewalls.
+    
+    Authentication: FTP typically requires a username and password to access the server, though anonymous FTP is sometimes used for public access.
+
+    Commands: FTP has commands for navigating directories, listing files, and transferring files, such as:
+
+        - USER: Username to authenticate.
+        - PASS: Password for the user.
+        - LIST: List files in the current directory.
+        - RETR: Retrieve a file from the server.
+        - STOR: Store a file on the server.
+
+    Example FTP Command:
+
+        - USER username
+          PASS password
+          RETR file.txt
+    
+    This retrieves file.txt from the server.
+
+    Secure Version: SFTP (SSH File Transfer Protocol) and FTPS (FTP Secure)
+
+        - SFTP: Uses SSH to securely transfer files over a network.
+        - FTPS: Uses SSL/TLS to secure FTP connections.
+
+
+3. DNS (Domain Name System)
+
+    - Layer: Application Layer (OSI), Application Layer (TCP/IP)
+    - Function: DNS translates human-readable domain names (e.g., www.example.com) into IP addresses (e.g., 192.168.1.1).
+    - Purpose: DNS is like the phonebook of the internet, allowing browsers and other network services to find the IP addresses of resources they want to connect to.
+
+    Key Features of DNS:
+
+        - Name Resolution: DNS resolves domain names into IP addresses. This is crucial because while humans use domain names to access websites, computers use IP addresses to locate servers.
+        - Caching: To reduce the load on DNS servers, DNS results are cached locally on clients and intermediate DNS servers for a specified time.
+
+    DNS Records:
+
+        - A Record: Maps a domain name to an IPv4 address.
+        - AAAA Record: Maps a domain name to an IPv6 address.
+        - MX Record: Specifies the mail server for a domain.
+        - CNAME Record: Alias for a domain name.
+        - NS Record: Identifies the authoritative name servers for a domain.
+    
+    Example DNS Query:
+
+        - Query: www.example.com
+          Response: 192.168.1.1
+    
+    How DNS Works:
+
+        - You type www.example.com in your browser.
+        - Your computer queries a DNS resolver to resolve the domain name.
+        - The resolver contacts various DNS servers to find the corresponding IP address (e.g., 192.168.1.1).
+        - The IP address is returned to your computer, and the browser connects to that IP address.
+
+
+4. DHCP (Dynamic Host Configuration Protocol)
+
+    - Layer: Application Layer (OSI), Application Layer (TCP/IP)
+    - Function: DHCP automatically assigns IP addresses to devices on a network.
+    - Purpose: It simplifies the process of managing IP address allocation in large networks by dynamically assigning an available IP address to a device when it connects.
+
+    Key Features of DHCP:
+
+        - Dynamic IP Assignment: DHCP eliminates the need for network administrators to manually assign IP addresses. When a device connects to the network, DHCP assigns it an IP address, subnet mask, default gateway, and DNS server information.
+        - Lease Time: IP addresses are leased to devices for a specified time. Once the lease expires, the device must renew the lease or be assigned a new IP.
+        - DHCP Server: A server or router running the DHCP service, responsible for assigning and managing IP addresses within a specific range or pool.
+
+    DHCP Process:
+        - Discover: The client sends a broadcast message to locate a DHCP server.
+        - Offer: The DHCP server responds with an available IP address and other network settings.
+        - Request: The client accepts the offered IP address.
+        - Acknowledge: The DHCP server confirms the assignment of the IP address.
+
+    Example DHCP Process (DORA):
+
+        - Discover: The client broadcasts a message requesting an IP address.
+        - Offer: The DHCP server responds with an IP address offer.
+        - Request: The client requests the offered IP address.
+        - Acknowledge: The DHCP server acknowledges the assignment.
