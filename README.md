@@ -21,8 +21,8 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] TCP/IP Model and OSI Model
 - [✅] IP Addressing and Subnetting
 - [✅] Network Protocols (HTTP, FTP, DNS, DHCP)
-- [🟡] Introduction to Routing and Switching
-- [ ] Practical: Setting up a basic network in VirtualBox or VMware
+- [✅] Introduction to Routing and Switching
+- [🟡] Practical: Setting up a basic network in VirtualBox or VMware
 
 ### 3. **Basic Network Scanning with Nmap**
 - [ ] Introduction to Nmap
