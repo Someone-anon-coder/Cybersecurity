@@ -1,0 +1,125 @@
+Setting Up a Basic Network in VirtualBox with Ubuntu ISO
+
+In this practical exercise, we’ll set up a basic network using VirtualBox and Ubuntu as the guest operating system. 
+We’ll configure two virtual machines (VMs) to represent two different networks, and configure networking between them. 
+This will help you understand how routers, switches, and IP addressing work in a virtualized environment.
+
+Prerequisites:
+
+    - Virtualbox: Download virtual box for your machine
+    - Ubuntu ISO: In this example we will use ubuntu ISO to simulate a network. Search ubuntu iso and download the latest version
+
+
+1) Create Two Virtual Machines in VirtualBox:
+
+    - Open VirtualBox and click on New to create the first virtual machine.
+    - Name: Ubuntu-VM1
+    - Type: Linux
+    - Version: Ubuntu (64-bit)
+    - Follow the on-screen prompts to configure the VM:
+        - Memory Size: 1024 MB (or more, depending on your system)
+        - Hard Disk: Create a new virtual disk (e.g., 10GB)
+        - Choose VDI (VirtualBox Disk Image) and Dynamically allocated.
+
+    - After creating the VM, proceed with installing Ubuntu using the ISO file.
+    - Repeat the process to create a second VM (e.g., Ubuntu-VM2).
+
+
+2) Configure VirtualBox Network Settings
+
+    For this exercise, we’ll use two virtual network adapters for each VM to simulate two networks. 
+    VirtualBox allows you to create multiple virtual networks using different network modes like NAT, Bridged, Host-Only, and Internal. 
+    Here, we’ll use Internal Network for communication between the VMs and NAT for internet access.
+    
+    VM1 (Ubuntu-VM1) Setup:
+
+        - Open Settings for Ubuntu-VM1 in VirtualBox.
+        - Navigate to Network.
+        - Enable Adapter 1 and set the Attached to option to Internal Network.
+            - Name: intnet (This is a custom network name that both VMs will use for communication)
+        
+        - Enable Adapter 2 and set the Attached to option to NAT for internet access.
+
+    VM2 (Ubuntu-VM2) Setup:
+
+        - Open Settings for Ubuntu-VM2.
+        - Navigate to Network.
+        - Enable Adapter 1 and set the Attached to option to Internal Network.
+            - Name: intnet
+        
+        - Enable Adapter 2 and set the Attached to option to NAT.
+
+3) Install Ubuntu on Both VMs
+
+    - Start Ubuntu-VM1 and mount the Ubuntu ISO in the virtual CD/DVD drive.
+    - Go through the installation steps:
+        - Set language, timezone, keyboard layout, and username/password.
+        - Install Ubuntu alongside other settings as needed.
+    
+    - After installation, repeat the process for Ubuntu-VM2.
+
+
+4. Network Configuration on Ubuntu VMs
+
+    Once both VMs are running Ubuntu, we’ll configure network settings inside each VM.
+    Configure Static IP Addresses for the Internal Network:
+
+    - On Ubuntu-VM1:
+
+        - Open the terminal in Ubuntu-VM1.
+        - Use ip a to list network interfaces and identify the network interface for Adapter 1 (which is connected to the internal network).
+            - Usually, the interface will be named something like enp0s3 or ens33.
+        
+        - Edit the network configuration file to assign a static IP: sudo nano /etc/netplan/00-installer-config.yaml
+        - Modify the file to configure a static IP (example IP address: 192.168.1.2):
+
+            network:
+              version: 2
+              renderer: networkd
+              ethernets:
+                enp0s3:
+                  dhcp4: no
+                  addresses:
+                    - 192.168.1.2/24
+                  gateway4: 192.168.1.1
+
+        - This sets the IP address to 192.168.1.2 and the subnet mask to 255.255.255.0.
+        - The gateway is not strictly needed for internal network communication but will be used for internet access (via the NAT adapter).
+        - Apply the changes: sudo netplan apply
+
+    - On Ubuntu-VM2:
+
+        - Open the terminal in Ubuntu-VM2.
+        - Use ip a to find the interface name (e.g., enp0s3).
+        - Edit the network configuration file to assign a static IP (example IP address: 192.168.1.3): sudo nano /etc/netplan/00-installer-config.yaml
+        - Modify the file similarly:
+
+            network:
+              version: 2
+              renderer: networkd
+              ethernets:
+                enp0s3:
+                  dhcp4: no
+                  addresses:
+                    - 192.168.1.3/24
+                  gateway4: 192.168.1.1
+        - Apply the changes: sudo netplan apply
+
+
+5. Verify Connectivity Between VMs
+
+    Now that both VMs have static IP addresses configured on the same internal network (192.168.1.0/24), you can verify if the two VMs can communicate with each other.
+    
+    From Ubuntu-VM1:
+
+        - Open a terminal.
+        - Ping Ubuntu-VM2’s IP address (192.168.1.3): ping 192.168.1.3
+
+    You should see replies from 192.168.1.3, indicating that the two VMs are connected.
+
+    From Ubuntu-VM2:
+
+        - Open a terminal.
+        - Ping Ubuntu-VM1’s IP address (192.168.1.2): ping 192.168.1.2
+
+    You should see replies from 192.168.1.2, confirming that the two VMs can communicate.
