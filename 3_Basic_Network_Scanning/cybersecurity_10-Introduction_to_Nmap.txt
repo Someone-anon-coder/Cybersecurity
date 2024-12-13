@@ -1,0 +1,90 @@
+Introduction To Nmap
+
+Nmap (Network Mapper) is a powerful open-source tool used for network discovery and security auditing. 
+It is widely used by system administrators, network engineers, and penetration testers to discover hosts, services, and vulnerabilities on a network. 
+Nmap can be used to scan both local and remote networks, providing essential information about the network’s structure and security posture.
+
+What is Nmap?
+
+    Nmap is a command-line tool for network exploration and security auditing. It allows you to:
+
+        - Discover hosts and services on a computer network.
+        - Detect operating systems, services, and versions running on remote devices.
+        - Perform security scans to identify vulnerabilities and weak spots.
+        - Test firewalls, detect open ports, and gather information for troubleshooting or penetration testing.
+    
+    Nmap works by sending crafted packets to a target and analyzing the responses. 
+    Depending on the response from the target, Nmap can infer information about the target device, such as open ports, operating systems, running services, and potential vulnerabilities.
+
+Common Use Cases of Nmap:
+
+    - Network Discovery: Identify active hosts and devices on a network. Discover which IP addresses are in use.
+    - Port Scanning: Identify which ports are open on a target device. Determine which services are running on those ports.
+    - Service Version Detection: Discover the version of services running on open ports (e.g., Apache, SSH, FTP).
+    - Operating System Detection: Determine the operating system running on a target device.
+    - Security Auditing: Detect security vulnerabilities based on open ports and running services. Identify misconfigurations, unused services, and outdated software.
+
+Key Concepts in Nmap:
+
+    - Host Discovery: Nmap can discover hosts on a network by sending ICMP Echo requests (ping), TCP connection requests, or ARP requests to determine which hosts are live and responsive.
+    - Port Scanning: Nmap can check for open ports on a target machine. It does this by sending a variety of packets (e.g., SYN, ACK, or FIN) to the target and observing the responses to determine if the port is open, closed, or filtered by a firewall.
+    - Service Version Detection: Once open ports are found, Nmap can probe these ports to determine the services running behind them (e.g., HTTP, FTP, SSH) and even their versions.
+    - OS Fingerprinting: Nmap can detect the operating system (OS) of the target device by analyzing network responses, which can give valuable insights into the target’s system and potential vulnerabilities.
+    - Scriptable Interaction: Nmap supports NSE (Nmap Scripting Engine), which allows users to create and use scripts to automate scanning tasks. These scripts can be used for everything from simple service detection to advanced vulnerability scanning.
+
+Basic Nmap Syntax:
+
+    The basic syntax of an Nmap command looks like this: nmap [options] [target]
+
+        - [options]: Options allow you to control the type of scan, scan speed, verbosity level, etc.
+        - [target]: The target specifies the host or network that you want to scan. This can be an IP address, a range of IPs, or a domain name.
+    
+    Some common options you might use with Nmap include:
+
+        - -sP: Ping scan (host discovery).
+        - -p: Specify port(s) to scan.
+        - -v: Increase verbosity (show more detailed information).
+        - -A: Enable OS detection, version detection, script scanning, and traceroute.
+
+Basic Nmap Commands:
+
+    1. Ping Scan: 
+    
+        - Discover Live Hosts on a Network. 
+        - A ping scan helps you identify which hosts are alive on a network by sending an ICMP Echo request (ping) to each host.
+        - To perform a simple ping scan on a range of IP addresses (e.g., 192.168.1.0/24): nmap -sn 192.168.1.0/24
+        - Explanation: -sn: Perform a "ping scan" (host discovery only, no port scanning).
+    
+    2. Port Scan: 
+    
+        - Discover Open Ports on a Target
+        - A port scan checks which ports are open on a target host.
+        - To perform a basic TCP scan on a target IP (e.g., 192.168.1.5): nmap 192.168.1.5
+        - Explanation: By default, Nmap will scan the 1000 most common TCP ports.
+    
+    3. Service Version Detection: 
+    
+        - Identify the Services Running on Open Ports
+        - To detect the versions of services running on open ports, you can use the -sV option.
+        - To scan a target IP for open ports and service versions (e.g., 192.168.1.5): nmap -sV 192.168.1.5
+        - Explanation: -sV: Service version detection, probes open ports to determine the service and its version.
+    
+    4. Operating System Detection: 
+    
+        - Identify the Target’s OS
+        - Nmap can attempt to determine the target’s operating system by analyzing network responses.
+        - To scan for an OS and version: nmap -O 192.168.1.5
+        - Explanation: -O: OS detection. Nmap attempts to guess the operating system of the target based on the behavior of the TCP/IP stack.
+    
+    5. Aggressive Scan: 
+    
+        - Combine Host Discovery, Version Detection, OS Detection, and Traceroute
+        - Nmap’s aggressive scan (-A) is a comprehensive scan that includes multiple features, such as OS detection, version detection, script scanning, and traceroute.
+        - To perform an aggressive scan on a target (e.g., 192.168.1.5): nmap -A 192.168.1.5
+        - Explanation: -A: Enable aggressive scanning, including OS detection, version detection, script scanning, and traceroute.
+    
+Key Nmap Scan Types:
+
+    - TCP Connect Scan (-sT): This is the default and most reliable scan. It completes a full TCP handshake with the target. nmap -sT 192.168.1.5
+    - SYN Scan (-sS): A stealthier scan that only sends SYN packets, not completing the TCP handshake. It is faster and less likely to be detected. nmap -sS 192.168.1.5
+    - UDP Scan (-sU): Used to scan for open UDP ports. UDP is connectionless, so it behaves differently than TCP. nmap -sU 192.168.1.5
