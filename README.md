@@ -25,8 +25,8 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] Practical: Setting up a basic network in VirtualBox or VMware
 
 ### 3. **Basic Network Scanning with Nmap**
-- [🟡] Introduction to Nmap
-- [ ] Nmap Basic Scanning Techniques (Ping scan, Port scan)
+- [✅] Introduction to Nmap
+- [🟡] Nmap Basic Scanning Techniques (Ping scan, Port scan)
 - [ ] Nmap Service Version Detection
 - [ ] Nmap OS Fingerprinting
 - [ ] Practical: Scanning local network and a target machine
