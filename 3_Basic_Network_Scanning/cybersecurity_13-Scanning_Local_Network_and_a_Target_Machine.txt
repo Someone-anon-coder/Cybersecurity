@@ -1,0 +1,152 @@
+Practical: Scanning Local Network and a Target Machine
+
+In this practical, we will use Nmap to scan a local network and a specific target machine. The goal is to:
+
+    - Scan the local network to identify active hosts.
+    - Perform a scan on a specific target machine to discover open ports, services, and potential vulnerabilities.
+
+This hands-on exercise will help you understand how to perform network reconnaissance and gather useful information for penetration testing, system administration, or network management.
+
+
+Setting Up Your Test Environment:
+
+    - A Local Network: Ideally, you should have multiple devices (VMs, physical machines, or containers) in a local network that you can scan. 
+    - If you don’t have multiple devices, you can use VirtualBox or VMware to create virtual machines with different operating systems (Linux, Windows, etc.).
+    - Nmap Installed: Ensure that Nmap is installed on your machine.
+    - Network Configuration: Ensure that all devices are connected to the same local network or subnet.
+
+
+Scanning the Local Network:
+
+    Identify Your Local IP Range:
+
+        - To scan a local network, you first need to know the IP range you want to scan. 
+        - You can determine this by checking your own machine’s IP address and subnet mask.
+        - For Linux: Run the following command to check your IP address and subnet: ifconfig
+        - For Windows: Run the following command to check your IP address and subnet: ipconfig
+    
+    Scan the Entire Subnet:
+
+        - Once you know your IP address and subnet mask, you can determine the IP range for your network. 
+        - If your IP address is 192.168.1.5 and the subnet mask is 255.255.255.0, you are in the 192.168.1.0/24 network, meaning the network has IPs from 192.168.1.1 to 192.168.1.254.
+        - Use Nmap to scan the entire subnet for live hosts: nmap -sn 192.168.1.0/24
+            - -sn: This option tells Nmap to only perform a ping scan (host discovery), which will detect live hosts on the network without scanning ports.
+    
+    Output:
+
+        $ nmap -sn 192.168.1.0/24
+
+        Starting Nmap 7.80 ( https://nmap.org ) at 2024-12-16 16:00 UTC
+        Nmap scan report for 192.168.1.1
+        Host is up (0.0012s latency).
+        Nmap scan report for 192.168.1.5
+        Host is up (0.0009s latency).
+        Nmap scan report for 192.168.1.10
+        Host is up (0.0015s latency).
+        Nmap scan report for 192.168.1.20
+        Host is up (0.0020s latency).
+        Nmap done: 256 IP addresses (4 hosts up) scanned in 3.12 seconds
+
+    Nmap detected that four devices are up in the 192.168.1.0/24 range: 192.168.1.1, 192.168.1.5, 192.168.1.10, and 192.168.1.20.
+
+
+Scanning a Specific Target Machine:
+
+    Now that we know there are live hosts on the network, let’s focus on scanning a specific target machine for open ports, services, and OS information.
+    Let’s say the target machine has the IP address 192.168.1.5.
+
+    Basic Port Scan:
+
+        - To check for open ports on the target machine, run the following Nmap command: nmap 192.168.1.5
+        - This will perform a basic TCP connect scan to identify open ports on the target machine. 
+        - Nmap will return a list of open ports and the services associated with them.
+        - Output:
+
+            $ nmap 192.168.1.5
+
+            Starting Nmap 7.80 ( https://nmap.org ) at 2024-12-16 16:05 UTC
+            Nmap scan report for 192.168.1.5
+            Host is up (0.0010s latency).
+            Not shown: 993 closed ports
+            PORT   STATE SERVICE
+            22/tcp open  ssh
+            80/tcp open  http
+            443/tcp open ssl/https
+            3306/tcp open mysql
+
+            Nmap done: 1 IP address (1 host up) scanned in 2.74 seconds
+
+        - Ports 22/tcp (SSH), 80/tcp (HTTP), 443/tcp (HTTPS), and 3306/tcp (MySQL) are open.
+    
+    Service Version Detection:
+
+        - To get more details about the services running on the open ports, add the -sV option to detect service versions: nmap -sV 192.168.1.5
+        - Output:
+
+            $ nmap -sV 192.168.1.5
+
+            Starting Nmap 7.80 ( https://nmap.org ) at 2024-12-16 16:10 UTC
+            Nmap scan report for 192.168.1.5
+            Host is up (0.0020s latency).
+            Not shown: 993 closed ports
+            PORT   STATE SERVICE    VERSION
+            22/tcp open  ssh        OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+            80/tcp open  http       Apache httpd 2.4.29 ((Ubuntu))
+            443/tcp open  ssl/https  Apache httpd 2.4.29 ((Ubuntu))
+            3306/tcp open  mysql     MySQL 5.7.31-0ubuntu0.18.04.1
+
+            Nmap done: 1 IP address (1 host up) scanned in 3.14 seconds
+        
+        - Now, you know that the SSH service is running OpenSSH 7.6p1, the HTTP server is Apache 2.4.29, and the MySQL service is running MySQL 5.7.31.
+    
+    OS Fingerprinting:
+
+        - To attempt to identify the operating system of the target machine, add the -O option: nmap -O 192.168.1.5
+        - Output:
+
+            $ nmap -O 192.168.1.5
+
+            Starting Nmap 7.80 ( https://nmap.org ) at 2024-12-16 16:15 UTC
+            Nmap scan report for 192.168.1.5
+            Host is up (0.0010s latency).
+            Not shown: 993 closed ports
+            PORT   STATE SERVICE    VERSION
+            22/tcp open  ssh        OpenSSH 7.6p1 Ubuntu 4ubuntu0.3 (Ubuntu Linux; protocol 2.0)
+            80/tcp open  http       Apache httpd 2.4.29 ((Ubuntu))
+            443/tcp open  ssl/https  Apache httpd 2.4.29 ((Ubuntu))
+            3306/tcp open  mysql     MySQL 5.7.31-0ubuntu0.18.04.1
+            Device type: general purpose
+            Running: Linux 4.X
+            OS CPE: cpe:/o:linux:linux_kernel:4
+            OS details: Linux 4.2 - 4.9
+            Network Distance: 1 hop
+
+            OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+            Nmap done: 1 IP address (1 host up) scanned in 6.24 seconds
+        
+        In this case, Nmap detected that the target is running Linux (kernel version 4.2 -4.9) and identified the OS as Ubuntu.
+    
+
+Scanning for Specific Ports:
+
+    - If you are interested in scanning only specific ports, you can use the -p option followed by the port numbers or ranges.
+    - Scan specific ports 22 (SSH), 80 (HTTP), and 443 (HTTPS): nmap -p 22,80,443 192.168.1.5
+    - Output:
+
+        $ nmap -p 22,80,443 192.168.1.5
+
+        Starting Nmap 7.80 ( https://nmap.org ) at 2024-12-16 16:20 UTC
+        Nmap scan report for 192.168.1.5
+        Host is up (0.0010s latency).
+        PORT   STATE SERVICE
+        22/tcp open  ssh
+        80/tcp open  http
+        443/tcp open ssl/https
+
+        Nmap done: 1 IP address (1 host up) scanned in 2.32 seconds
+
+
+Scanning the Entire Local Network for Open Ports:
+
+    - To scan the entire local network and discover which hosts have open ports, run the following command: nmap -p 22,80,443 192.168.1.0/24
+    - This will scan all hosts in the 192.168.1.0/24 range and check for open ports 22 (SSH), 80 (HTTP), and 443 (HTTPS).
