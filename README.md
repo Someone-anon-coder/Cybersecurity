@@ -28,10 +28,10 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] Introduction to Nmap
 - [✅] Nmap Service Version Detection
 - [✅] Nmap OS Fingerprinting
-- [🟡] Practical: Scanning local network and a target machine
+- [✅] Practical: Scanning local network and a target machine
 
 ### 4. **Linux Basics for Cybersecurity**
-- [ ] Linux Command Line Basics
+- [🟡] Linux Command Line Basics
 - [ ] File Permissions in Linux
 - [ ] Working with Processes in Linux
 - [ ] Practical: Creating scripts to automate system tasks
