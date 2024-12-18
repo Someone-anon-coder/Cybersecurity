@@ -1,0 +1,139 @@
+Linux Command Line Basics
+
+The Linux command line is a powerful tool for interacting with your system, especially in the context of cybersecurity. 
+Understanding basic Linux commands is crucial for system administration, security testing, and automation. 
+This section will cover the most commonly used commands and concepts that you'll need to become proficient with the Linux command line.
+
+Basic Linux Command Line Structure:
+
+    - Linux commands typically have the following structure: command [options] [arguments]
+    - Command: The name of the program or utility you want to execute (e.g., ls, cd, cat).
+    - Options: Flags that modify the behavior of the command (e.g., -l, -r).
+    - Arguments: The files, directories, or parameters the command acts upon (e.g., a file name, directory name).
+
+
+Navigating the File System:
+
+    One of the most common tasks is navigating the file system. Here are the basic commands:
+
+        - pwd: Print the current working directory: pwd
+        - ls: List files and directories in the current directory: ls or ls [file_path]
+            
+            - ls -l: List with detailed information (permissions, owner, size, etc.).
+            - ls -a: List all files, including hidden files.    
+        
+        - cd: Change the current directory: cd [directory_path]
+            - cd ~ or cd will take you to your home directory.
+            - cd .. will take you up one level (parent directory).
+        
+        - mkdir: Make a new directory: mkdir [directory_name]
+        - rmdir: Remove an empty directory: rmdir [directory_name]
+        - rm: Remove files and directories: rm [file_path] or rm -r [directory_path]
+
+            - rm filename: Delete a file.
+            - rm -r directory_name: Recursively remove a directory and its contents.
+
+
+Viewing and Editing Files:
+
+    - cat: Concatenate and display the content of a file: cat [filename]
+    - less: View file content one screen at a time (useful for large files): less [filename]
+    - more: Similar to less, but less flexible: more [filename]
+    - nano: Simple text editor for terminal. Create or edit a file: nano [filename]
+    - vim: Advanced text editor for terminal. Use vim for editing system files or larger code: vim [filename]
+
+
+File Permissions and Ownership:
+
+    In Linux, each file and directory has permissions that determine who can read, write, or execute them. 
+    The ls -l command will show you the permissions of files in the directory.
+    
+    Example output of ls -l: -rwxr-xr-x 1 user user 1234 Jan 1 12:34 file.txt
+    Explanation of the output:
+
+        - -rwxr-xr-x: File permissions.
+            - The first character represents the file type (- for a regular file, d for a directory).
+            - The next three characters (rwx) represent permissions for the owner of the file.
+            - The next three characters (r-x) represent permissions for the group.
+            - The final three characters (r-x) represent permissions for others (everyone else).
+        
+        - 1: Number of hard links to the file.
+        - user: The owner of the file.
+        - user: The group of the file.
+        - 1234: File size in bytes.
+        - Jan 1 12:34: Last modification date and time.
+        - file.txt: The name of the file.
+    
+    Changing Permissions:
+
+        - chmod: Change file permissions: chmod 755 file.txt
+            - 7 = rwx (read, write, execute) for the owner.
+            - 5 = r-x (read, execute) for the group.
+            - 5 = r-x (read, execute) for others.
+
+        - Make a file executable: chmod +x file.txt
+        - chown: Change file owner or group: chown user:group file.txt
+    
+
+Working with Processes:
+
+    Managing processes is a key skill in Linux, especially when it comes to cybersecurity tasks like identifying suspicious processes or managing system resources.
+
+        - ps: Show running processes: ps aux
+        This will display a list of all running processes along with their details (PID, user, CPU usage, memory usage, etc.).
+
+        - top: Interactive process viewer that provides a dynamic, real-time view of the system's resource usage: top
+        Press q to exit.
+
+        - kill: Terminate a process by PID: kill 1234
+        kill -9: Forcefully kill a process.
+
+        - htop: A more advanced and user-friendly version of top (can be installed via sudo apt install htop on Ubuntu): htop
+    
+
+Searching for Files and Content:
+
+    - find: Search for files based on various criteria.
+        - Example 1: Find files by name: find /path/to/search -name "filename"
+        - Example 2: Find files by type (e.g., only directories): find /path/to/search -type d
+    
+    - grep: Search for patterns in files: grep "search_term" filename
+    grep -r: Recursively search through directories.
+
+    - locate: Find files by name (faster than find): locate filename
+    You may need to run sudo updatedb to update the database.
+
+
+Redirecting Output:
+
+    In Linux, you can redirect the output of commands to files or even other commands. 
+    This is useful for logging or chaining commands.
+
+    - >: Redirect standard output to a file (overwrite): echo "Hello, World!" > hello.txt
+    - >>: Append output to a file: echo "Another line" >> hello.txt
+    - | (Pipe): Pass the output of one command as input to another command: ps aux | grep ssh
+    - 2>: Redirect standard error to a file: command 2> error_log.txt
+
+
+Networking Basics:
+
+    - ping: Test network connectivity to a host: ping 192.168.1.1
+    - ifconfig: Display or configure network interfaces (older tool): ifconfig
+    - ip: A more modern tool to manage networking: ip a
+    - netstat: Display active network connections and listening ports: netstat -tuln
+    - wget: Download files from the web: wget http://example.com/file.zip
+
+
+Using Manual Pages:
+
+    To learn more about a command or explore its options, you can use the man (manual) command: man [command_name]
+    For example: man ls
+    This will display the manual for the ls command, where you can learn about various options and usage.
+
+
+Practice Commands:
+
+    Task 1: Navigate to the /home directory and list all files, including hidden ones.
+    Task 2: Create a new directory called test_dir, then navigate into it.
+    Task 3: Create a file called file.txt, and write the string "Hello, Linux!" into it using echo.
+    Task 4: Change the permissions of file.txt so that it’s readable, writable, and executable by the owner, and readable by everyone else.
