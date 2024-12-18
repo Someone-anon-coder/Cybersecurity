@@ -133,7 +133,7 @@ Using Manual Pages:
 
 Practice Commands:
 
-    Task 1: Navigate to the /home directory and list all files, including hidden ones.
-    Task 2: Create a new directory called test_dir, then navigate into it.
-    Task 3: Create a file called file.txt, and write the string "Hello, Linux!" into it using echo.
-    Task 4: Change the permissions of file.txt so that it’s readable, writable, and executable by the owner, and readable by everyone else.
+    - Task 1: Navigate to the /home directory and list all files, including hidden ones.
+    - Task 2: Create a new directory called test_dir, then navigate into it.
+    - Task 3: Create a file called file.txt, and write the string "Hello, Linux!" into it using echo.
+    - Task 4: Change the permissions of file.txt so that it’s readable, writable, and executable by the owner, and readable by everyone else.
