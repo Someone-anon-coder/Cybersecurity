@@ -1,0 +1,171 @@
+File Permissions in Linux
+
+File permissions in Linux determine who can read, write, or execute a file. Understanding file permissions is fundamental to managing and securing a Linux system. 
+This section will cover how Linux permissions work, how to modify them, and how to interpret the output of the ls -l command.
+
+
+Understanding Linux File Permissions:
+
+    In Linux, every file and directory has three types of permissions:
+
+        - Read (r): Allows viewing the contents of the file or listing the contents of a directory.
+        - Write (w): Allows modifying the contents of the file or adding/removing files from a directory.
+        - Execute (x): Allows executing the file (if it's a program or script) or entering a directory.
+
+    Linux permissions are assigned to three categories of users:
+
+        - Owner: The user who owns the file (creator of the file).
+        - Group: The group that the file belongs to. Each user is a part of a group, and files can be assigned to groups.
+        - Others: Any other user who is not the owner or a part of the file's group.
+    
+
+Viewing File Permissions:
+
+    You can view the permissions of files and directories with the ls -l command: ls -l
+    
+    $ ls -l file.txt
+    -rwxr-xr-x 1 user group 1234 Jan 1 12:34 file.txt
+
+    Explanation of the output:
+
+        - -rwxr-xr-x: This represents the file's permissions.
+
+            - The first character (-) represents the file type: - is a regular file, and d would indicate a directory.
+            - The next three characters (rwx) represent the owner's permissions (read, write, execute).
+            - The next three characters (r-x) represent the group's permissions (read, execute, but not write).
+            - The final three characters (r-x) represent the others' permissions (read, execute, but not write).
+        
+        - 1: The number of hard links to the file.
+        - user: The file's owner.
+        - group: The file's group.
+        - 1234: The file size in bytes.
+        - Jan 1 12:34: The date and time of the last modification.
+        - file.txt: The name of the file.
+    
+
+Types of Permissions:
+
+    Permissions can be understood in the following format:
+
+        - Owner Permissions: The first three characters after the file type.
+        - Group Permissions: The middle three characters.
+        - Other Permissions: The last three characters.
+    
+    Symbolic Representation:
+
+        - r = read (value 4)
+        - w = write (value 2)
+        - x = execute (value 1)
+        - - = no permission (value 0)
+    
+    Numeric Representation: Permissions can also be represented numerically (octal). Each permission type is assigned a value:
+
+        - r = 4
+        - w = 2
+        - x = 1
+        - - = 0
+    
+    These values are added together to represent a set of permissions:
+
+        - rwx = 4 + 2 + 1 = 7
+        - rw- = 4 + 2 = 6
+        - r-- = 4
+    
+    Example: The permission string rwxr-xr-x can be translated as: 
+
+        - Owner: rwx = 7
+        - Group: r-x = 5
+        - Others: r-x = 5
+
+        - So the numeric representation would be 755.
+
+
+Changing File Permissions:
+
+    To modify file permissions, you can use the chmod (change mode) command: chmod [options] permissions file
+
+    Where:
+
+        - permissions can be either symbolic (e.g., rwx) or numeric (e.g., 755).
+        - file is the file or directory whose permissions you want to modify.
+
+    Changing Permissions Using Numeric Values: 
+    
+    - The numeric system is useful when setting permissions in bulk. 
+    - Each permission set (owner, group, others) is represented by a number:
+
+        - 7 = rwx
+        - 6 = rw-
+        - 5 = r-x
+        - 4 = r--
+        - 3 = wx-
+        - 2 = w--
+        - 1 = x--
+        - 0 = ---
+
+    - Example: Change permissions to 755 (owner can read, write, and execute; group and others can read and execute): chmod 755 file.txt
+
+    Changing Permissions Using Symbolic Values: You can also modify permissions symbolically:
+
+        - r: Read
+        - w: Write
+        - x: Execute
+        - +: Add permission
+        - -: Remove permission
+        - =: Set exact permission (overwrite existing ones)
+    
+    Example 1: Add execute permission for the owner: chmod u+x file.txt
+    Example 2: Remove write permission from the group: chmod g-w file.txt
+    Example 3: Give read and execute permissions to others: chmod o+rx file.txt
+    Example 4: Set exact permissions (rw-r--r--) on a file: chmod u=rw,go=r file.txt
+
+
+Special Permissions in Linux:
+
+    In addition to the standard read, write, and execute permissions, Linux has special permissions that can be used to control file behavior more precisely.
+    Setuid (Set User ID)
+
+        - The Setuid permission allows a user to execute a file with the permissions of the file’s owner (not the user who executes it).
+        - This is typically used for system programs that need to run with elevated privileges.
+        - Example: The passwd command allows regular users to change their passwords, but it needs to modify system files that are only writable by root. Setuid allows this.
+        - To set Setuid permission: chmod u+s file
+        
+        - To check if Setuid is set: ls -l file
+        It will appear as an s in the user execute position: -rwsr-xr-x 1 root root 1234 Jan 1 12:34 file
+
+    Setgid (Set Group ID)
+
+        - The Setgid permission allows files to be executed with the permissions of the group, rather than the user executing the file.
+        - For directories, when Setgid is set, files created within the directory inherit the group of the directory, rather than the group of the user who created the file.
+        - To set Setgid permission: chmod g+s directory
+    
+    Sticky Bit
+
+        - The Sticky bit is typically used on directories. When set, it ensures that only the owner of a file or directory within that directory can delete or rename the file.
+        - This is commonly used in the /tmp directory to ensure that users can only delete their own temporary files.
+        - To set the Sticky bit on a directory: chmod +t [directory]
+        
+        - To check if the Sticky bit is set, use ls -ld: ls -ld /tmp
+        The directory will show a t at the end of the permissions: drwxrwxrwt 10 root root 4096 Jan 1 12:34 /tmp
+
+
+Changing File Ownership:
+
+    Linux also allows you to change the owner and group of a file.
+    chown Command:
+
+        - The chown command is used to change the ownership of a file or directory: chown [owner][:group] file
+        - owner: The user you want to assign ownership to.
+        - group: The group you want to assign the file to (optional).
+    
+        - Example 1: Change the owner of a file to user1: chown user1 file.txt
+        - Example 2: Change the owner and group of a file: chown user1:group1 file.txt
+        - Example 3: Change only the group of a file: chown :group1 file.txt
+
+
+Practical Exercises:
+
+    - Exercise 1: View the permissions of a file.
+    - Exercise 2: Change the permissions of a file.
+    - Exercise 3: Add execute permission to a script.
+    - Exercise 4: Use the chown command to change the ownership of a file.
