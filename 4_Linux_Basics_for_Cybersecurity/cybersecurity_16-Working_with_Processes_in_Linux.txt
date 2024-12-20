@@ -1,0 +1,184 @@
+Working with Processes in Linux
+
+In Linux, processes are instances of programs that are being executed. 
+Each process has its own memory space and system resources. 
+Understanding how to work with processes is crucial in cybersecurity for tasks like monitoring, killing malicious processes, managing system resources, and analyzing system performance.
+This section will cover essential commands for managing processes in Linux, as well as tools to view and manipulate processes.
+
+
+What is a Process?
+
+    A process is a running instance of a program. 
+    It can be a simple command like ls or a complex system program like sshd (the SSH daemon). 
+    Processes are assigned unique IDs known as Process IDs (PIDs).
+
+    Each process is created when a program is executed and is assigned:
+
+        - PID (Process ID): A unique identifier for the process.
+        - PPID (Parent Process ID): The PID of the process that created the current process.
+        - UID (User ID): The ID of the user who started the process.
+        - GID (Group ID): The group ID of the user who started the process.
+        - Priority (nice value): Determines the scheduling of processes.
+
+
+Viewing Running Processes
+
+    To view running processes, you can use commands like ps, top, htop, and pgrep.
+
+    ps (Process Status)
+
+        - The ps command shows a snapshot of the current processes. 
+        - You can use different options to get detailed information about processes.
+        
+        - ps aux: Shows all processes running on the system.
+        - ps -ef: Displays a full-format listing of all running processes.
+        - Output:
+
+            USER  | PID  | %CPU | %MEM | VSZ   | RSS   | TTY   | STAT | START | TIME | COMMAND
+            user1 | 1234 | 0.0  | 0.1  | 5232  | 2348  | pts/0 | S    | 10:12 | 0:00 | bash
+            root  | 4567 | 0.1  | 2.5  | 34560 | 15684 | tty1  | Ss   | 09:45 | 0:12 | /sbin/init
+
+            - USER: The owner of the process.
+            - PID: The Process ID.
+            - %CPU: CPU usage percentage.
+            - %MEM: Memory usage percentage.
+            - VSZ: Virtual memory size.
+            - RSS: Resident set size (physical memory used).
+            - TTY: The terminal associated with the process.
+            - STAT: Process status (e.g., S for sleeping, R for running).
+            - START: The time the process started.
+            - TIME: The total CPU time consumed by the process.
+            - COMMAND: The command that started the process.
+
+    top (Task Manager)
+
+        - The top command provides a dynamic, real-time view of the system’s processes, including CPU and memory usage.
+        - To run top: top
+        
+        - The output will display:
+
+            - PID: Process ID
+            - USER: Process owner
+            - %CPU: CPU usage
+            - %MEM: Memory usage
+            - TIME+: CPU time consumed
+            - COMMAND: The command running
+
+        - You can interact with top using the following commands:
+
+            - P: Sort by CPU usage.
+            - M: Sort by memory usage.
+            - k: Kill a process by entering the PID.
+            - q: Quit top.
+        
+    htop (Interactive Process Viewer)
+
+        - htop is a more advanced and user-friendly version of top. 
+        - It provides a colored, interactive display of system processes.
+
+        - To install htop (if not installed): sudo apt install htop
+        - To run htop: htop
+
+        - Similar to top, you can sort processes, search for processes, and kill processes. 
+        - htop allows you to interact with processes using arrow keys, and it shows processes in a tree-like structure.
+    
+    pgrep (Process Grep)
+
+        - The pgrep command allows you to search for processes by name or other criteria.
+        
+        - Example: Find the PID of a process named nginx: pgrep nginx
+        - Example: Find the PID of a process running as a specific user: pgrep -u root
+
+
+Managing Processes
+
+    Once you have identified processes, you can manage them by sending signals (commands) to the processes. 
+    Some of the most common operations include terminating, pausing, and resuming processes.
+
+    kill (Terminate Processes)
+
+        - The kill command sends signals to processes. 
+        - The default signal is SIGTERM (signal 15), which gracefully terminates a process: kill PID
+        - To kill a process with PID 1234: kill 1234
+
+        - Forcefully Kill a Process: If a process does not terminate gracefully, you can forcefully kill it by sending a SIGKILL (signal 9).
+        - kill -9 PID
+        - Forcefully kill process 1234: kill -9 1234
+    
+    pkill (Kill Processes by Name)
+
+        - The pkill command allows you to kill processes by name, which is useful when you don’t know the exact PID.
+
+        - Example: To kill all processes named nginx: pkill nginx
+        - Example: Kill a process by sending a specific signal (e.g., SIGSTOP to pause the process): pkill -SIGSTOP [process_name]
+
+    killall (Kill All Processes by Name)
+
+        - The killall command kills all processes with a specific name.
+        - Example: Kill all processes named nginx: killall nginx
+
+
+Prioritizing Processes (Nice and Renice)
+
+    In Linux, you can control the priority of processes using the nice and renice commands.
+
+    nice (Start a Process with a Given Priority)
+
+        - The nice command starts a process with a specified priority (called "niceness").
+        - Syntax: nice -n <priority> command
+
+        - The niceness value can range from -20 (highest priority) to 19 (lowest priority). The default is 0.
+        - Example: Run a process with higher priority (niceness of -10): nice -n -10 command_name
+
+    renice (Change the Priority of an Existing Process)
+
+        - The renice command changes the priority of an already running process.
+        - Syntax: renice -n <priority> -p <PID>
+        - Example: Change the priority of process with PID 1234 to a niceness of 10: renice -n 10 -p 1234
+    
+
+Background and Foreground Processes
+
+    In Linux, you can run processes in the background or the foreground, depending on whether you want the terminal to be available for other commands.
+
+    Running a Process in the Background
+
+        - To run a command in the background, append an ampersand (&) to the command.
+        - Example: Run a command in the background: command_name &
+    
+    Bringing a Background Process to the Foreground
+
+        - Use the fg command to bring a background process back to the foreground.
+        - Syntax: fg %<job_number>
+        - To view the job numbers, use the jobs command: jobs
+        - Example: Bring the first background job to the foreground: fg %1
+    
+    Suspending a Process
+        
+        - You can suspend a running process and send it to the background using the Ctrl+Z keyboard shortcut. 
+        - To resume a suspended process in the background, use bg.
+
+        - Example: Suspend the process and run it in the background: bg %1
+
+
+Analyzing Process Resources
+
+    To analyze the resource usage of processes, you can use tools like top, htop, ps, and iotop.
+
+    iotop (Monitor Disk I/O)
+        
+        - iotop is useful for monitoring disk I/O of processes. 
+        - It shows real-time disk usage by processes.
+
+        - To install iotop: sudo apt install iotop
+        - To run iotop: sudo iotop
+        - This will display processes with the highest disk I/O activity.
+
+
+Practical Exercises
+
+    - Exercise 1: Use ps, top, and htop to view the processes running on your system.
+    - Exercise 2: Use kill and pkill to terminate a specific process by PID and by name.
+    - Exercise 3: Use nice to start a new process with a lower priority and observe its CPU usage.
+    - Exercise 4: Run a process in the background using & and bring it to the foreground using fg.
+    - Exercise 5: Use iotop to monitor disk I/O activity of processes.
