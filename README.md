@@ -33,8 +33,8 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 ### 4. **Linux Basics for Cybersecurity**
 - [✅] Linux Command Line Basics
 - [✅] File Permissions in Linux
-- [🟡] Working with Processes in Linux
-- [ ] Practical: Creating scripts to automate system tasks
+- [✅] Working with Processes in Linux
+- [🟡] Practical: Creating scripts to automate system tasks
 
 ### 5. **Introduction to Cryptography**
 - [ ] Basics of Encryption and Decryption
