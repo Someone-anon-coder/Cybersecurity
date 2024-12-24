@@ -1,0 +1,123 @@
+Practical - Creating Scripts to Automate System Tasks - Part 1
+
+In Linux, scripting is an essential skill for automating repetitive tasks, system administration, and cybersecurity. 
+Writing shell scripts allows you to automate tasks like backups, process management, monitoring system health, and more. 
+In this section, we’ll focus on writing basic shell scripts using Bash, the most common shell in Linux systems.
+
+
+What is a Shell Script?
+
+    A shell script is a file containing a series of commands that the shell (usually Bash) will execute. 
+    It allows you to automate tasks that you would normally perform manually on the command line.
+
+    - Shebang (#!): The first line of a script specifies the interpreter that should be used to execute the script. For example, #!/bin/bash tells the system to use Bash for executing the script.
+    - Bash Commands: These are the commands and logic written in the script. They can include basic shell commands, loops, conditionals, and function definitions.
+
+
+Basic Script Syntax
+
+    A simple Bash script looks like this:
+
+        #!/bin/bash
+        # This is a comment, it won't be executed
+
+        echo "Hello, World!"
+
+    - #!/bin/bash: This is the shebang, which tells the system to use the Bash shell to interpret the script.
+    - echo: The echo command outputs text to the terminal.
+    - Comments: Anything after the # is considered a comment and won't be executed.
+
+    Creating Your First Script
+
+        - Create a new script file: Use any text editor to create a script file, such as nano, vim, or gedit: nano hello_world.sh
+        - Write the script: 
+            
+            #!/bin/bash
+            echo "Hello, World!"
+
+        - Save and exit: In nano, press Ctrl + X, then press Y to confirm saving, and press Enter to save the file.
+        - Make the script executable: Use the chmod command to make your script executable: chmod +x hello_world.sh
+        - Run the script: Now, you can run the script: ./hello_world.sh
+        - Output:
+
+            Hello, World!
+
+
+Basic Shell Script Operations
+
+    Let's explore some basic concepts for shell scripting, such as using variables, conditionals, loops, and functions.
+    
+    Variables: You can create variables to store values (e.g., strings, numbers) in your script.
+
+            #!/bin/bash
+            # Variable assignment
+            name="Alice"
+            age=25
+
+            # Using variables
+            echo "Name: $name"
+            echo "Age: $age"
+        
+        - String Variables: Strings are stored without quotation marks in the variable.
+        - Number Variables: You can store integers, but if you plan on doing arithmetic, you’ll need to use double parentheses or let.
+    
+    Input from the User: You can prompt the user for input using the read command.
+
+            #!/bin/bash
+            # User input
+            echo "Enter your name:"
+            read name
+            echo "Hello, $name!"
+        
+        - This will prompt the user to input their name, and the script will greet them with it.
+    
+    Conditionals: You can add conditionals (if-else statements) to your scripts to perform actions based on certain conditions.
+
+            #!/bin/bash
+            # Conditionals
+            echo "Enter a number:"
+            read number
+
+            if [ $number -gt 10 ]; then
+                echo "Number is greater than 10."
+            else
+                echo "Number is less than or equal to 10."
+            fi
+        
+        - -gt: Greater than (comparison operator).
+        - -lt: Less than.
+        - -eq: Equal to.
+        - -ne: Not equal to.
+        - -ge: Greater than or equal to.
+        - -le: Less than or equal to.
+    
+    Loops: Loops allow you to run a set of commands multiple times.
+
+        For Loop:
+
+            #!/bin/bash
+            for i in {1..5}; do
+                echo "Iteration $i"
+            done
+        
+        While Loop:
+
+            #!/bin/bash
+            counter=1
+            while [ $counter -le 5 ]; do
+                echo "Iteration $counter"
+                ((counter++))  # Increment counter
+            done
+    
+    Functions: Functions help you organize your code into reusable blocks.
+
+            #!/bin/bash
+            # Function definition
+            greet() {
+                echo "Hello, $1!"
+            }
+
+            # Function call
+            greet "Bob"
+        
+        $1 refers to the first argument passed to the function (e.g., "Bob").
