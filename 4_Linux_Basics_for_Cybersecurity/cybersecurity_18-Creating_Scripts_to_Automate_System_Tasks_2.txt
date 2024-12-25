@@ -1,0 +1,102 @@
+Practical - Creating Scripts to Automate System Tasks - Part 2
+
+
+Example 1: Backup Script
+
+    - Create a script that automatically backs up files or directories.
+
+        #!/bin/bash
+        # Backup script
+        SOURCE_DIR="/home/user/documents"
+        BACKUP_DIR="/home/user/backups"
+
+        # Create backup directory if it doesn't exist
+        mkdir -p $BACKUP_DIR
+
+        # Copy files to backup directory
+        cp -r $SOURCE_DIR/* $BACKUP_DIR
+
+        # Output success message
+        echo "Backup completed successfully!"
+    
+    - This script creates a backup of the documents directory into the backups directory.
+    - It uses the cp command to copy files and directories (-r for recursive).
+    - It checks and creates the backup directory (mkdir -p).
+
+
+Example 2: System Monitoring Script
+
+    - Create a script to monitor CPU and memory usage.
+
+        #!/bin/bash
+        # System Monitoring Script
+
+        # Check CPU usage
+        echo "CPU Usage:"
+        top -n 1 | grep "Cpu(s)" | awk '{print $2 + $4 "% CPU used"}'
+
+        # Check memory usage
+        echo "Memory Usage:"
+        free -h | grep Mem | awk '{print $3 "/" $2 " used"}'
+
+        # Check disk space
+        echo "Disk Space Usage:"
+        df -h | grep "^/dev/"
+    
+    - top: To check CPU usage.
+    - free: To check memory usage.
+    - df: To check disk usage.
+
+
+Example 3: Log Rotation Script
+
+    - A log rotation script can help manage log files and prevent them from growing too large.
+
+        #!/bin/bash
+        # Log Rotation Script
+
+        LOG_DIR="/var/log/myapp"
+        MAX_SIZE=1048576  # 1MB in bytes
+
+        for log_file in $LOG_DIR/*.log; do
+            # Check if file size exceeds max size
+            if [ $(stat -c %s "$log_file") -gt $MAX_SIZE ]; then
+                # Archive the log file
+                mv "$log_file" "$log_file.old"
+                echo "Archived $log_file"
+            fi
+        done
+    
+    - This script checks all .log files in the specified directory.
+    - If a log file exceeds the size limit, it is renamed (archived) by adding .old.
+
+
+Automating Scripts with Cron Jobs
+
+    - You can schedule your scripts to run automatically using Cron Jobs. 
+    - This is especially useful for recurring tasks like backups, system monitoring, and log rotation.
+
+    - To create a cron job:
+
+        - Edit the cron file: crontab -e
+        - Cron syntax: The cron job syntax is:
+
+            * * * * * /path/to/script.sh
+            - - - - -
+            | | | | |
+            | | | | +--- Day of week (0-6) (Sunday=0)
+            | | | +----- Month (1-12)
+            | | +------- Day of month (1-31)
+            | +--------- Hour (0-23)
+            +----------- Minute (0-59)
+        
+        - For example, to run a script every day at 2:00 AM: 0 2 * * * /home/user/scripts/backup.sh
+    
+
+Practical Exercises
+
+    - Exercise 1: Write a script that prompts the user for their name and age, then outputs a greeting and tells them how many years until they are 100.
+    - Exercise 2: Write a script that checks if a directory exists. If it doesn't, create it.
+    - Exercise 3: Write a script that monitors disk usage and sends a warning email if the disk usage exceeds a threshold (e.g., 90%).
+    - Exercise 4: Automate a system task, like checking the availability of a service (systemctl status nginx) and restarting it if it's down.
+    - Exercise 5: Write a log rotation script that deletes logs older than 30 days in a specific directory.
