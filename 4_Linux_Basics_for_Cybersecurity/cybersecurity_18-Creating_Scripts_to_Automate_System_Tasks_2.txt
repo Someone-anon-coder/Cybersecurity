@@ -6,17 +6,13 @@ Example 1: Backup Script
     - Create a script that automatically backs up files or directories.
 
         #!/bin/bash
-        # Backup script
+        
         SOURCE_DIR="/home/user/documents"
         BACKUP_DIR="/home/user/backups"
 
-        # Create backup directory if it doesn't exist
         mkdir -p $BACKUP_DIR
-
-        # Copy files to backup directory
         cp -r $SOURCE_DIR/* $BACKUP_DIR
 
-        # Output success message
         echo "Backup completed successfully!"
     
     - This script creates a backup of the documents directory into the backups directory.
@@ -29,17 +25,13 @@ Example 2: System Monitoring Script
     - Create a script to monitor CPU and memory usage.
 
         #!/bin/bash
-        # System Monitoring Script
 
-        # Check CPU usage
         echo "CPU Usage:"
         top -n 1 | grep "Cpu(s)" | awk '{print $2 + $4 "% CPU used"}'
 
-        # Check memory usage
         echo "Memory Usage:"
         free -h | grep Mem | awk '{print $3 "/" $2 " used"}'
 
-        # Check disk space
         echo "Disk Space Usage:"
         df -h | grep "^/dev/"
     
@@ -53,15 +45,12 @@ Example 3: Log Rotation Script
     - A log rotation script can help manage log files and prevent them from growing too large.
 
         #!/bin/bash
-        # Log Rotation Script
 
         LOG_DIR="/var/log/myapp"
         MAX_SIZE=1048576  # 1MB in bytes
 
         for log_file in $LOG_DIR/*.log; do
-            # Check if file size exceeds max size
             if [ $(stat -c %s "$log_file") -gt $MAX_SIZE ]; then
-                # Archive the log file
                 mv "$log_file" "$log_file.old"
                 echo "Archived $log_file"
             fi
