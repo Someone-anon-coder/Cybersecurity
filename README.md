@@ -34,10 +34,10 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] Linux Command Line Basics
 - [✅] File Permissions in Linux
 - [✅] Working with Processes in Linux
-- [🟡] Practical: Creating scripts to automate system tasks
+- [✅] Practical: Creating scripts to automate system tasks
 
 ### 5. **Introduction to Cryptography**
-- [ ] Basics of Encryption and Decryption
+- [🟡] Basics of Encryption and Decryption
 - [ ] Symmetric vs Asymmetric Encryption
 - [ ] Cryptographic Hash Functions (SHA, MD5)
 - [ ] Practical: Writing a basic encryption program in C/C++
