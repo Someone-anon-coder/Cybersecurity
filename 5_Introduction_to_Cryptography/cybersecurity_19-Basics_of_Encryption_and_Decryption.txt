@@ -132,5 +132,3 @@ Example: Symmetric Encryption (AES)
 
         - -d: Decrypt mode.
         - The same password (yourpassword) is used to decrypt the file.
-
-
