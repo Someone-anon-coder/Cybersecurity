@@ -37,8 +37,8 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] Practical: Creating scripts to automate system tasks
 
 ### 5. **Introduction to Cryptography**
-- [🟡] Basics of Encryption and Decryption
-- [ ] Symmetric vs Asymmetric Encryption
+- [✅] Basics of Encryption and Decryption
+- [🟡] Symmetric vs Asymmetric Encryption
 - [ ] Cryptographic Hash Functions (SHA, MD5)
 - [ ] Practical: Writing a basic encryption program in C/C++
 
