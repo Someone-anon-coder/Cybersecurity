@@ -38,8 +38,8 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 
 ### 5. **Introduction to Cryptography**
 - [✅] Basics of Encryption and Decryption
-- [🟡] Symmetric vs Asymmetric Encryption
-- [ ] Cryptographic Hash Functions (SHA, MD5)
+- [✅] Symmetric vs Asymmetric Encryption
+- [🟡] Cryptographic Hash Functions (SHA, MD5)
 - [ ] Practical: Writing a basic encryption program in C/C++
 
 ### 6. **Web Application Security**
