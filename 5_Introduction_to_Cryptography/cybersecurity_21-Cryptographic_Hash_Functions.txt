@@ -1,0 +1,108 @@
+Cryptographic Hash Functions
+
+Cryptographic hash functions are a fundamental part of modern cryptography and cybersecurity. 
+They are used to transform input data of any size (such as a file or a message) into a fixed-length string of characters, which is typically represented in hexadecimal or binary form. 
+This output is called the hash value or digest.
+Hash functions have various applications in digital signatures, password storage, integrity checking, and data verification. 
+However, not all hash functions are equally secure, and understanding their strengths and weaknesses is important for cybersecurity.
+Let's dive deeper into how cryptographic hash functions work, with a focus on two of the most well-known algorithms: MD5 and SHA.
+
+
+What is a Cryptographic Hash Function?
+
+    A cryptographic hash function takes an input (or "message") and returns a fixed-size string of bytes, commonly referred to as the digest. 
+    The key properties of a cryptographic hash function are:
+
+        - Deterministic: The same input will always produce the same output.
+        - Fast computation: The hash function should be fast to compute for any input.
+        - Pre-image resistance: It should be computationally difficult to reverse the process — that is, to find the original input given the hash value.
+        - Small changes in input produce drastically different outputs: A small change in the input (even a single bit) should result in a completely different hash.
+        - Collision resistance: It should be computationally infeasible to find two different inputs that hash to the same output.
+        - Fixed size output: The output of a hash function is always of a fixed length, regardless of the size of the input.
+
+
+Common Cryptographic Hash Functions: MD5 and SHA
+
+    MD5 (Message Digest Algorithm 5)
+
+        - MD5 was once widely used in various applications like checking the integrity of files, storing passwords, and digital signatures. 
+        - However, MD5 is no longer considered secure due to its vulnerability to collision attacks. 
+        - A collision occurs when two different inputs produce the same hash output, which breaks the integrity of the hash function.
+
+        How MD5 Works:
+            
+            - The input is padded to a length that is a multiple of 512 bits.
+            - The padded message is processed in blocks of 512 bits.
+            - Each block undergoes multiple rounds of processing to produce a 128-bit hash (32 hexadecimal characters).
+
+        Output Length: 128 bits (16 bytes)
+        Common Use Cases:
+
+            - File integrity checks (now deprecated due to vulnerabilities).
+            - Storing checksums for file comparison.
+        
+    SHA (Secure Hash Algorithm)
+
+        - SHA is a family of cryptographic hash functions designed by the National Security Agency (NSA). 
+        - The most commonly used versions are SHA-1, SHA-256, and SHA-512.
+
+        SHA-1:
+
+            - SHA-1 produces a 160-bit hash value (20 bytes).
+            - SHA-1 has been found to be vulnerable to collision attacks and is no longer considered secure for cryptographic use. 
+            - However, it was widely used in the past in applications like digital signatures and SSL certificates.
+        
+        SHA-256:
+
+            - SHA-256 is part of the SHA-2 family and produces a 256-bit hash value (32 bytes).
+            - SHA-256 is much stronger than SHA-1 and is widely used in security protocols, including SSL/TLS, Bitcoin (for mining), and data integrity checks.
+        
+        SHA-512:
+
+            - SHA-512 produces a 512-bit hash value (64 bytes).
+            - It’s a part of the SHA-2 family and is often used in applications that require very high security.
+        
+        SHA-2 Family: The SHA-2 family includes SHA-224, SHA-256, SHA-384, SHA-512, and SHA-512/224, SHA-512/256, where the number indicates the length of the hash.
+
+
+Key Differences Between MD5 and SHA
+
+    Feature       |	MD5                                       | SHA-1                               | SHA-256
+    Output Length | 128 bits (16 bytes)                       | 160 bits (20 bytes)	                | 256 bits (32 bytes)
+    Security      | Weak (collision vulnerabilities)          | Weak (collision vulnerabilities)    | Strong (widely considered secure)
+    Speed	      | Fast                                      | Moderate                            | Moderate
+    Use Cases     | File integrity checks (legacy), checksums | Deprecated, digital signatures, SSL | Widely used in TLS/SSL, cryptocurrencies, blockchain
+
+
+When to Use MD5 and SHA
+
+    MD5:
+
+        - Deprecated for cryptographic use due to collision vulnerabilities.
+        - Still useful for basic integrity checks where security is not a concern (e.g., checking if files have been transferred without corruption).
+        - Some legacy systems may still use MD5, but it should be avoided in new applications.
+    
+    SHA:
+
+        - SHA-1: Still used in legacy systems but should be avoided for new applications. It’s not suitable for modern cryptographic use.
+        - SHA-256: The most commonly used hash function in secure communications, certificates, and cryptocurrency systems like Bitcoin.
+        - SHA-512: Used in cases requiring more security, such as financial systems or large-scale data integrity checks.
+
+
+Practical Applications of Cryptographic Hash Functions
+
+    - File Integrity: Hash functions are used to generate a hash of a file. The recipient can then compute the hash of the received file and compare it with the original hash to ensure integrity.
+    - Password Storage: Instead of storing passwords in plaintext, systems store the hash of the password. When a user logs in, their password is hashed and compared to the stored hash.
+    - Digital Signatures: In public-key cryptography, a message can be "signed" by hashing it and encrypting the hash with a private key. The recipient can decrypt the hash with the sender’s public key and verify the authenticity and integrity of the message.
+    - Blockchain & Cryptocurrencies: Cryptocurrencies like Bitcoin use SHA-256 in the mining process and for securing transaction data.
+    - Checksums: Hash functions are widely used for generating checksums that allow the recipient to verify if the data has been modified during transmission.
+
+
+Vulnerabilities of Hash Functions
+
+    Collision Resistance: For cryptographic use, a hash function must be collision-resistant. This means that it should be computationally infeasible to find two different inputs that produce the same hash value.
+
+        - MD5 and SHA-1: These hash functions are no longer collision-resistant, meaning attackers can potentially create two different messages that have the same hash.
+        - SHA-256: Still considered secure and collision-resistant at the time of writing.
+
+    Pre-image Resistance: A good cryptographic hash function must make it computationally infeasible to generate the original input from its hash output.
