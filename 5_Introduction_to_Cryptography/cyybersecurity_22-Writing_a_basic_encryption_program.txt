@@ -1,0 +1,152 @@
+Practical: Writing a basic encryption program in C/C++
+
+In this section, we'll write a simple encryption program using symmetric encryption (AES) and XOR encryption in C/C++. 
+This will give you hands-on experience with implementing encryption algorithms and understanding how encryption/decryption works at a low level.
+We'll start with a basic XOR encryption for learning purposes and then move to a more robust algorithm like AES.
+
+
+XOR Encryption in C/C++
+
+    XOR encryption is one of the simplest forms of encryption. 
+    It's not secure by modern cryptographic standards, but it's a great way to understand how encryption and decryption work at a basic level.
+
+    How XOR Encryption Works:
+
+        - The XOR operation takes two bits and returns 1 if the bits are different, and 0 if they are the same.
+        - XOR is symmetric: If you XOR a value with a key, and then XOR the result with the same key again, you get back the original value.
+
+    This property makes XOR useful for encryption and decryption. 
+    The key is simply XOR'd with the data during both encryption and decryption processes.
+
+    XOR Encryption Program in C++:
+
+        #include <iostream>
+        #include <string>
+        using namespace std;
+
+        string xorEncryptDecrypt(string data, char key) {
+            for (int i = 0; i < data.length(); i++) {
+                data[i] = data[i] ^ key;
+            }
+            return data;
+        }
+
+        int main() {
+            string data;
+            char key;
+
+            cout << "Enter the data to encrypt/decrypt: ";
+            getline(cin, data);
+
+            cout << "Enter the key (single character): ";
+            cin >> key;
+
+            string encryptedData = xorEncryptDecrypt(data, key);
+            cout << "Encrypted Data: " << encryptedData << endl;
+
+            string decryptedData = xorEncryptDecrypt(encryptedData, key);
+            cout << "Decrypted Data: " << decryptedData << endl;
+
+            return 0;
+        }
+    
+    How the Code Works:
+
+        - We use an XOR operation on each character of the input data with a key.
+        - The xorEncryptDecrypt function performs the same operation for both encryption and decryption because XOR is reversible.
+        - In the main function, we input a string (the data to encrypt), and a character key (used for the XOR operation).
+    
+    Example Output:
+
+        Enter the data to encrypt/decrypt: Hello, World!
+        Enter the key (single character): K
+        Encrypted Data: @4(-..%.03%0
+        Decrypted Data: Hello, World!
+    
+    This is a simple and effective way to understand how encryption and decryption work using XOR. 
+    For actual use, however, this is not secure, and more sophisticated encryption algorithms should be used.
+
+
+AES Encryption in C++ Using OpenSSL
+
+    Now that we have a basic encryption algorithm, let's move to a more robust and secure approach. 
+    We'll implement AES encryption in C++ using the OpenSSL library.
+    AES is widely used in modern cryptography for encrypting sensitive data, and it's much more secure than XOR encryption.
+
+    Step-by-Step Guide to AES Encryption in C++:
+
+        - Install OpenSSL: sudo apt-get install libssl-dev
+        - Writing AES Encryption Program in C++
+
+            #include <iostream>
+            #include <openssl/aes.h>
+            #include <openssl/rand.h>
+            #include <string.h>
+            using namespace std;
+
+            void AES_Encrypt(const unsigned char* input, unsigned char* output, unsigned char* key) {
+                AES_KEY encryptKey;
+                AES_set_encrypt_key(key, 128, &encryptKey);
+
+                AES_encrypt(input, output, &encryptKey);
+            }
+
+            void AES_Decrypt(const unsigned char* input, unsigned char* output, unsigned char* key) {
+                AES_KEY decryptKey;
+                AES_set_decrypt_key(key, 128, &decryptKey);
+
+                AES_decrypt(input, output, &decryptKey);
+            }
+
+            int main() {
+                unsigned char key[16] = {0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x97, 0x75, 0x46, 0x0f, 0x58, 0x8c};
+
+                unsigned char input[16] = "This is a test!";
+                unsigned char encrypted[16];
+                unsigned char decrypted[16];
+
+                AES_Encrypt(input, encrypted, key);
+                cout << "Encrypted: ";
+                for(int i = 0; i < 16; i++) {
+                    printf("%02x", encrypted[i]);
+                }
+                cout << endl;
+
+                AES_Decrypt(encrypted, decrypted, key);
+                cout << "Decrypted: " << decrypted << endl;
+
+                return 0;
+            }
+        
+        - How the Code Works:
+
+            - AES_set_encrypt_key: This function sets up the AES encryption key. We pass a 128-bit key (16 bytes) to it.
+            - AES_encrypt: This function encrypts the input data using the AES algorithm.
+            - AES_decrypt: This function decrypts the data back to plaintext using the same key.
+            - Key and Data: We define a 16-byte key and a 16-byte input string, which is a multiple of 16 bytes (AES block size for 128-bit encryption).
+            - ECB Mode: We're using Electronic Codebook (ECB) mode for simplicity. Note that ECB mode is not recommended for high-security applications because identical plaintext blocks result in identical ciphertext blocks. More secure modes like CBC or GCM should be used in real-world applications.
+
+        - Example Output:
+
+            - Encrypted: 85e3db6d4473f1a3d8f5b4596fef3ab3
+            - Decrypted: This is a test!
+
+
+Explanation of AES Encryption:
+
+    AES operates on blocks of data (128 bits) and uses keys of different lengths (128, 192, or 256 bits). 
+    In this example, we used a 128-bit key and encrypted a 128-bit block of data.
+    
+    AES has different modes of operation, such as:
+
+        - ECB (Electronic Codebook): Simplest mode but not secure for most use cases.
+        - CBC (Cipher Block Chaining): More secure than ECB because it uses an initialization vector (IV) to randomize the encryption process.
+        - GCM (Galois/Counter Mode): Provides both encryption and authentication (integrity checking).
+    
+
+Further Steps for Learning Cryptography:
+
+    - Study AES in different modes: Learn about other modes like CBC, GCM, and CTR.
+    - Implement key management: Understand how to securely store and share cryptographic keys.
+    - Explore other cryptographic algorithms: Learn about other algorithms like RSA (asymmetric encryption), and elliptic curve cryptography (ECC).
+    - Learn about Padding schemes: In block cipher algorithms like AES, the input data often needs to be padded to match the block size. Learn how padding works (e.g., PKCS7 padding).
