@@ -40,10 +40,10 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] Basics of Encryption and Decryption
 - [✅] Symmetric vs Asymmetric Encryption
 - [✅] Cryptographic Hash Functions (SHA, MD5)
-- [🟡] Practical: Writing a basic encryption program in C/C++
+- [✅] Practical: Writing a basic encryption program in C/C++
 
 ### 6. **Web Application Security**
-- [ ] Understanding Web Applications (HTTP/HTTPS)
+- [🟡] Understanding Web Applications (HTTP/HTTPS)
 - [ ] OWASP Top 10 Vulnerabilities
   - [ ] SQL Injection
   - [ ] Cross-Site Scripting (XSS)
