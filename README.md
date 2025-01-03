@@ -43,8 +43,8 @@ Each section below is a major cybersecurity concept. Check off the boxes as you 
 - [✅] Practical: Writing a basic encryption program in C/C++
 
 ### 6. **Web Application Security**
-- [🟡] Understanding Web Applications (HTTP/HTTPS)
-- [ ] OWASP Top 10 Vulnerabilities
+- [✅] Understanding Web Applications (HTTP/HTTPS)
+- [🟡] OWASP Top 10 Vulnerabilities
   - [ ] SQL Injection
   - [ ] Cross-Site Scripting (XSS)
   - [ ] Cross-Site Request Forgery (CSRF)
